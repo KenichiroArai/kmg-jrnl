@@ -45,6 +45,16 @@ boolean removeCurrentTag();
  * @return true：成功、false：失敗
  */
 boolean updateCurrentTag();
+
+/**
+ * 新しいタグを処理する<br>
+ *
+ * @author KenichiroArai
+ * @since 0.1.0
+ * @param tag Javadoc追加のタグ設定モデル
+ * @return true：成功、false：失敗
+ */
+boolean processNewTag(JdaTagConfigModel tag);
 ```
 
 ### 2. JdtsBlockReplLogicImplの実装追加
@@ -177,7 +187,7 @@ public boolean updateCurrentTag() {
 }
 ```
 
-### 4. JdtsReplServiceImplの実装修正
+### 3. JdtsReplServiceImplの実装修正
 
 `kmg-tool/src/main/java/kmg/tool/application/service/impl/JdtsReplServiceImpl.java`の`replace`メソッドを以下のように修正：
 
@@ -212,6 +222,7 @@ public boolean replace() throws KmgToolException {
         while ((tag = this.jdtsBlockReplLogic.getNextTag()) != null) {
             if (!this.jdtsBlockReplLogic.hasExistingTag()) {
                 // タグが存在しない場合の処理
+                this.jdtsBlockReplLogic.processNewTag(tag);
                 continue;
             }
 
@@ -249,17 +260,22 @@ public boolean replace() throws KmgToolException {
 }
 ```
 
+### 4. processJavadocTagsメソッドの削除
+
+`JdtsBlockReplLogic`インターフェースと`JdtsBlockReplLogicImpl`クラスから`processJavadocTags`メソッドを削除しました。このメソッドの機能は、より細かい粒度のメソッドに分割され、`JdtsReplServiceImpl`の`replace`メソッドで制御されるようになりました。
+
 ## 期待される効果
 
 - タグ処理のロジックがより明確になる
 - 各処理ステップが分離され、制御が容易になる
 - タグ処理の順序制御が可能になる
 - 処理の再利用性が向上する
+- タグ処理の責務がより適切に分離される
 
 ## チェックリスト
 
-- [ ] JdtsBlockReplLogicインターフェースに新規メソッドを追加
-- [ ] JdtsBlockReplLogicImplに新規フィールドを追加
-- [ ] JdtsBlockReplLogicImplに新規メソッドを実装
-- [ ] JdtsReplServiceに新規メソッドを追加
-- [ ] JdtsReplServiceImplに新規メソッドを実装
+- [x] JdtsBlockReplLogicインターフェースに新規メソッドを追加
+- [x] JdtsBlockReplLogicImplに新規フィールドを追加
+- [x] JdtsBlockReplLogicImplに新規メソッドを実装
+- [x] JdtsReplServiceImplのreplaceメソッドを修正
+- [x] processJavadocTagsメソッドを削除
