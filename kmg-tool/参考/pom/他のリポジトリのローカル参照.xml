@@ -46,16 +46,16 @@
             <groupId>kmg.core</groupId>
             <artifactId>kmg-core</artifactId>
             <version>0.2.0</version>
-            <scope>system</scope>
             <!-- TODO KenichiroArai 2025/05/19 kmg-coreのv0.2.0がリリースするまで仮で直接指定 -->
+            <scope>system</scope>
             <systemPath>${project.basedir}/../kmg-core/target/kmg-core-0.2.0.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>kmg.fund</groupId>
             <artifactId>kmg-fund</artifactId>
             <version>0.1.0</version>
-            <scope>system</scope>
             <!-- TODO KenichiroArai 2025/05/19 kmg-cundのv0.2.0がリリースするまで仮で直接指定 -->
+            <scope>system</scope>
             <systemPath>${project.basedir}/../kmg-fund/target/kmg-fund-0.1.0.jar</systemPath>
         </dependency>
 
