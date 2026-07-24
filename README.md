@@ -51,7 +51,6 @@ KMG フレームワーク全体で利用する共通基盤プロジェクト群�
 プロジェクト例
 
 * `kb-todo-core`
-* `kb-todo-db`
 * `kb-todo-security`
 * `kb-todo-cache`
 * `kb-todo-logging`
@@ -101,14 +100,16 @@ KMG フレームワーク全体で利用する共通基盤プロジェクト群�
 * Application
 * Domain
 * Infrastructure
+* Repository
 
-REST API と業務ロジックを実装する。
+REST API と業務ロジックとDBを実装する。
 
 プロジェクト例
 
 * `gr-todo-main-api`
 * `gr-todo-member-api`
 * `gr-todo-auth-api`
+* `gr-todo-db-api`
 
 ---
 
@@ -125,7 +126,7 @@ mk-*  →  gr-*  →  kb-*
 * `kmg-*` はフレームワーク・共通基盤を提供する。
 * `kb-*` はドキュメント、共通ライブラリ、インフラおよびツールを担当する。
 * `mk-*` はフロントエンドを担当する。
-* `gr-*` は業務ロジックおよび API を担当する。
+* `gr-*` は業務ロジック、DBおよび API を担当する。
 * 逆方向の依存は作成しない。
 
 ---
